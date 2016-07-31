@@ -1,0 +1,19 @@
+{
+  "name": "video-portal",
+  "version": "1.0.0",
+  "description": "This is the backend API code that needs to be consumed by front-end applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Vladimir Kirienko",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0",
+    "q": "^1.4.1"
+  }
+}
