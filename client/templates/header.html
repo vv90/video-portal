@@ -1,0 +1,17 @@
+<header class="header">
+	<h3 class="header-logo">Video Portal</h3>
+	<nav>
+		<nav-item route="'/'">Home</nav-item>
+		<nav-item route="'/videos'">Videos</nav-item>
+
+	</nav>
+	<div class="header-auth">
+		<div ng-show="currentUser">
+			<h3>{{currentUser}}</h3>
+			<span class="header-link" ng-click="logOut()">Log Out</span>
+		</div>
+		<div ng-hide="currentUser">
+			<span class="header-link" ng-click="logIn()">Log In</span>
+		</div>
+	</div>
+</header>
