@@ -15,7 +15,7 @@
 			authService.login(username, password)
 				.then(function (response) {
 					// set the user on the App Controller
-					$scope.setUser(response.username);
+					$scope.setUser();
 					$scope.hideLogin();
 				})
 				.catch(function (err) {

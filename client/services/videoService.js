@@ -5,17 +5,48 @@
 (function () {
 	'use strict';
 
-	function videoService($http) {
-		return {
-			getAll: function (skip, limit) {
-				return $http.get('/videos?skip=' + skip + '&limit=' + limit);
-			},
-			get: function (id) {
-				return $http.get('/video?videoId' + id);
-			},
-			rate: function (id, rating) {
-				return $http.post('/video/ratings?videoId' + id + '&rating=' + rating);
-			}
+	function videoService($http, $q, Session, BaseDataService) {
+
+		// inherit from the base service
+		var VideoService = function () {
+			BaseDataService.apply(this, arguments);
 		};
+		VideoService.prototype = new BaseDataService();
+
+		VideoService.prototype.getAll = function (skip, limit) {
+			return this.makeRequest({
+				url: '/videos',
+				method: 'GET',
+				params: {skip: skip, limit: limit, sessionId: Session.sessionId}
+			}, function (response) {
+				// return only the videos array
+				return response.data.data;
+			});
+		};
+
+		VideoService.prototype.get = function (id) {
+			return this.makeRequest({
+				url: '/video',
+				method: 'GET',
+				params: {videoId: id, sessionId: Session.sessionId}
+			}, function (response) {
+				// return only the video
+				return response.data.data;
+			});
+		};
+
+		VideoService.prototype.rate = function (id, rating) {
+			return this.makeRequest({
+				url: '/video/ratings',
+				method: 'POST',
+				params: {sessionId: Session.sessionId},
+				data: {videoId: id, rating: rating}
+			});
+		};
+
+		return new VideoService();
 	}
+	videoService.$inject = ['$http', '$q', 'Session', 'BaseDataService'];
+
+	angular.module('videoPortal').factory('videoService', videoService);
 })();

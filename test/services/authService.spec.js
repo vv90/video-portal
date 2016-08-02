@@ -84,6 +84,21 @@ describe('Auth service', function () {
 			$httpBackend.expectGET('/user/logout?sessionId=1');
 			$httpBackend.flush();
 		});
+
+		it ('terminates the current session after logout', function () {
+			Session.create('use', 1);
+
+			$httpBackend.whenGET('/user/logout?sessionId=1')
+				.respond({status: 'success'});
+
+			Session.sessionId = 1;
+			authService.logout();
+
+			$httpBackend.expectGET('/user/logout?sessionId=1');
+			$httpBackend.flush();
+			expect(Session.username).toBe(null);
+			expect(Session.sessionId).toBe(null);
+		});
 	});
 
 });

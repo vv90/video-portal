@@ -5,7 +5,7 @@
 (function (){
 	'use strict';
 
-	function appCtrl($scope, authService) {
+	function appCtrl($scope, authService, Session) {
 		$scope.currentUser = null;
 		$scope.loginActive = false;
 		$scope.showLogin = function () {
@@ -14,8 +14,8 @@
 		$scope.hideLogin = function () {
 			$scope.loginActive = false;
 		};
-		$scope.setUser = function (username) {
-			$scope.currentUser = "Tom Anderson";
+		$scope.setUser = function () {
+			$scope.currentUser = Session.username;
 		};
 		$scope.logOut = function () {
 			authService.logout().then(function () {
@@ -24,7 +24,7 @@
 
 		};
 	}
-	appCtrl.$inject = ['$scope', 'authService'];
+	appCtrl.$inject = ['$scope', 'authService', 'Session'];
 
 	angular.module('videoPortal').controller('AppCtrl', appCtrl);
 })();

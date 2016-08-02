@@ -6,9 +6,11 @@ describe('App controller', function () {
 	beforeEach(module('videoPortal'));
 	var $controller;
 	var $rootScope;
-	beforeEach(inject(function(_$controller_, _$rootScope_) {
+	var Session;
+	beforeEach(inject(function(_$controller_, _$rootScope_, _Session_) {
 		$controller = _$controller_;
 		$rootScope = _$rootScope_;
+		Session = _Session_;
 	}));
 
 	it ('does not show login dialog when loaded', function (){
@@ -25,5 +27,16 @@ describe('App controller', function () {
 		$scope.showLogin();
 
 		expect($scope.loginActive).toBe(true);
+	});
+
+	it ('sets current user from the Session when setUser is called', function () {
+		var $scope = {};
+
+		var controller = $controller('AppCtrl', {$scope: $scope});
+		Session.username = 'user';
+
+		$scope.setUser();
+
+		expect($scope.currentUser).toBe('user');
 	});
 });

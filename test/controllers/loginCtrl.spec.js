@@ -48,7 +48,7 @@ describe('Login controller', function (){
 			$scope.login('user1', 'password');
 			$scope.$apply();
 
-			expect($scope.setUser).toHaveBeenCalledWith('user1');
+			expect($scope.setUser).toHaveBeenCalled();
 		});
 
 		it ('hides login dialog upon successful login', function () {
