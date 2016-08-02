@@ -4,16 +4,27 @@
   "description": "This is the backend API code that needs to be consumed by front-end applications.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/karma start",
     "start": "node index.js"
   },
   "author": "Vladimir Kirienko",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
     "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.8",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.2",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "phantomjs": "^2.1.7"
   }
 }

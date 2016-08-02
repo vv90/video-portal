@@ -1,19 +1,19 @@
-<div class="overlay" ng-show="loginActive">
+<div class="overlay" ng-if="loginActive">
 	<div class="overlay-dialog" ng-controller="LoginCtrl">
 		<h3 class="overlay-heading">Log In</h3>
 		<form class="form overlay-form">
 			<div class="form-item">
 				<label>User</label>
-				<input type="text" />
+				<input type="text" ng-model="username"/>
 			</div>
 			<div class="form-item">
 				<label>Password</label>
-				<input type="password" />
+				<input type="password" ng-model="password"/>
 			</div>
 		</form>
 		<div class="overlay-buttons">
-			<button class="button" type="button">Cancel</button>
-			<button class="button button-primary" type="button">Log In</button>
+			<button class="button" type="button" ng-click="hideLogin()">Cancel</button>
+			<button class="button button-primary" type="button" ng-click="login(username, password)">Log In</button>
 		</div>
 	</div>
 </div>

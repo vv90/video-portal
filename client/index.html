@@ -6,10 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 	<link rel="stylesheet" href="style/style.css"/>
 </head>
-<body ng-app="videoPortal">
+<body ng-app="videoPortal" ng-controller="AppCtrl">
 
 	<div ng-include="'/templates/login.html'"></div>
-	<div class="app-container" ng-controller="AppCtrl">
+	<div class="app-container" >
 		<div ng-include="'/templates/header.html'"></div>
 
 		<div ng-view class="view-container" ></div>
@@ -24,8 +24,12 @@
 
 	<script src="app.js"></script>
 	<script src="controllers/appCtrl.js"></script>
+	<script src="controllers/loginCtrl.js"></script>
 	<script src="controllers/videosCtrl.js"></script>
 	<!--<script src="controllers/navigationCtrl.js"></script>-->
+
+	<script src="services/Session.js"></script>
+	<script src="services/authService.js"></script>
 
 	<script src="directives/navItemDirective.js"></script>
 
