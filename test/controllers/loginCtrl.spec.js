@@ -11,28 +11,29 @@ describe('Login controller', function (){
 		$controller = _$controller_;
 	}));
 
-	describe('login', function () {
-		// var $q;
-		// var authService;
+	describe('login()', function () {
+		var $q;
+		var authService;
 		var $scope = {};
-		var loginSpy;
+		//var loginSpy;
 
 
-		beforeEach(inject(function($rootScope, authService, $q) {
-			//$q = _$q_;
-			//authService = _authService_;
+		beforeEach(inject(function($rootScope, _authService_, _$q_) {
+			$q = _$q_;
+			authService = _authService_;
 
 			$scope = $rootScope.$new();
 			$scope.setUser = jasmine.createSpy('setUSer');
 			$scope.hideLogin = jasmine.createSpy('hideLogin');
 
 			$controller('LoginCtrl', {$scope: $scope, authService: authService});
-			loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
-				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
-			});
 		}));
 
 		it ('calls authService with correct parameters', function () {
+			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
+			});
+
 			$scope.login('user', 'password');
 			$scope.$apply();
 
@@ -40,6 +41,10 @@ describe('Login controller', function (){
 		});
 
 		it ('sets a user on a parent scope upon successful login', function (){
+			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
+			});
+
 			$scope.login('user1', 'password');
 			$scope.$apply();
 
@@ -47,6 +52,9 @@ describe('Login controller', function (){
 		});
 
 		it ('hides login dialog upon successful login', function () {
+			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
+			});
 			$scope.login('user', 'password');
 			$scope.$apply();
 
@@ -54,7 +62,14 @@ describe('Login controller', function (){
 		});
 
 		it ('shows error if login failed', function () {
-			fail();
+			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.reject({status: 'error', error: 'login failed'});
+			});
+
+			$scope.login('user', 'password');
+			$scope.$apply();
+
+			expect($scope.error).toBe('login failed');
 		});
 	});
 

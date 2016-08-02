@@ -6,6 +6,7 @@
 	'use strict';
 
 	function loginCtrl($scope, authService) {
+		$scope.error = null;
 		$scope.cancel = function () {
 			$scope.hideLogin();
 		};
@@ -16,6 +17,9 @@
 					// set the user on the App Controller
 					$scope.setUser(response.username);
 					$scope.hideLogin();
+				})
+				.catch(function (err) {
+					$scope.error = err.error;
 				});
 		};
 	}

@@ -158,6 +158,14 @@ body {
 	text-align: right;
 }
 
+.form-error {
+	display: block;
+	margin: auto;
+	text-align: center;
+	font-size: 0.8em;
+	color: red;
+}
+
 .button {
 	color: #676a6c;
 	font-size: 1em;
