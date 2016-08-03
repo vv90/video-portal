@@ -1,5 +1,5 @@
 <div class="overlay" ng-if="loginActive">
-	<div class="overlay-dialog" ng-controller="LoginCtrl">
+	<div class="overlay-dialog">
 		<h3 class="overlay-heading">Log In</h3>
 		<form class="form overlay-form">
 			<div class="form-item">
@@ -13,7 +13,7 @@
 		</form>
 		<span class="form-error" ng-show="error" ng-bind="error"></span>
 		<div class="overlay-buttons">
-			<button class="button" type="button" ng-click="hideLogin()">Cancel</button>
+			<button class="button" type="button" ng-click="cancel()">Cancel</button>
 			<button class="button button-primary" type="button" ng-click="login(username, password)">Log In</button>
 		</div>
 	</div>

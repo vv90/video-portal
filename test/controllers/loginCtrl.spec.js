@@ -6,15 +6,21 @@ describe('Login controller', function (){
 	beforeEach(module('videoPortal'));
 
 	var $controller;
+	var $rootScope;
+	var events;
+	var $scope;
 
-	beforeEach(inject(function (_$controller_) {
+	beforeEach(inject(function (_$controller_, _$rootScope_, _events_) {
 		$controller = _$controller_;
+		$rootScope = _$rootScope_;
+		$scope = $rootScope.$new();
+		events = _events_;
 	}));
 
-	describe('login()', function () {
+	describe('login', function () {
 		var $q;
 		var authService;
-		var $scope = {};
+
 		//var loginSpy;
 
 
@@ -22,46 +28,38 @@ describe('Login controller', function (){
 			$q = _$q_;
 			authService = _authService_;
 
-			$scope = $rootScope.$new();
-			$scope.setUser = jasmine.createSpy('setUSer');
-			$scope.hideLogin = jasmine.createSpy('hideLogin');
+			// $scope.setUser = jasmine.createSpy('setUSer');
+			// $scope.hideLogin = jasmine.createSpy('hideLogin');
 
-			$controller('LoginCtrl', {$scope: $scope, authService: authService});
+
 		}));
 
 		it ('calls authService with correct parameters', function () {
+			$controller('LoginCtrl', {$scope: $scope, authService: authService});
 			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
 				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
 			});
 
 			$scope.login('user', 'password');
-			$scope.$apply();
+			//$scope.$apply();
 
 			expect(loginSpy).toHaveBeenCalledWith('user', 'password');
 		});
 
-		it ('sets a user on a parent scope upon successful login', function (){
-			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
-				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
-			});
-
-			$scope.login('user1', 'password');
-			$scope.$apply();
-
-			expect($scope.setUser).toHaveBeenCalled();
-		});
-
 		it ('hides login dialog upon successful login', function () {
+			$controller('LoginCtrl', {$scope: $scope, authService: authService});
+			$scope.loginActive = true;
 			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
 				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
 			});
 			$scope.login('user', 'password');
 			$scope.$apply();
 
-			expect($scope.hideLogin).toHaveBeenCalled();
+			expect($scope.loginActive).toBe(false);
 		});
 
 		it ('shows error if login failed', function () {
+			$controller('LoginCtrl', {$scope: $scope, authService: authService});
 			var loginSpy = spyOn(authService, 'login').and.callFake(function (username, password) {
 				return $q.reject({status: 'error', error: 'login failed'});
 			});
@@ -71,16 +69,49 @@ describe('Login controller', function (){
 
 			expect($scope.error).toBe('login failed');
 		});
+
+		it ('emits loginChallengeSuccess event after successful loginChallenge', function () {
+			$controller('LoginCtrl', {$scope: $scope, authService: authService});
+			spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
+			});
+			var eventEmitSpy = spyOn($scope, '$emit');
+
+			$rootScope.$broadcast(events.auth.loginChallenge, '/path');
+			$scope.login('user', 'password');
+			$scope.$apply();
+
+			expect(eventEmitSpy).toHaveBeenCalledWith(events.auth.loginChallengeSuccess, '/path')
+		});
+
+		it ('does not emit loginChallengeSuccess without loginChallenge', function () {
+			$controller('LoginCtrl', {$scope: $scope, authService: authService});
+			spyOn(authService, 'login').and.callFake(function (username, password) {
+				return $q.when({status: 'success', username: username, sessionId: 'sessionid'});
+			});
+			var eventEmitSpy = spyOn($scope, '$emit');
+
+			$scope.login('user', 'password');
+			$scope.$apply();
+
+			expect(eventEmitSpy).not.toHaveBeenCalled();
+		});
 	});
 
-	it ('hides login dialog upon clicking cancel', function () {
-		var scope = {
-			hideLogin: jasmine.createSpy('hideLogin')
-		};
-		$controller('LoginCtrl', {$scope: scope});
+	it ('hides login dialog when cancel is clicked', function () {
+		$controller('LoginCtrl', {$scope: $scope});
+		$scope.loginActive = true;
 
-		scope.cancel();
+		$scope.cancel();
 
-		expect(scope.hideLogin).toHaveBeenCalled();
-	})
+		expect($scope.loginActive).toBe(false);
+	});
+
+	it ('displays login dialog when loginRequired event is fired', function () {
+		$controller('LoginCtrl', {$scope: $scope});
+
+		$rootScope.$broadcast(events.auth.loginChallenge);
+
+		expect($scope.loginActive).toBe(true);
+	});
 });

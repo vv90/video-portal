@@ -12,7 +12,7 @@
 			scope: {
 				route: '='
 			},
-			link: function (scope, element, attributes) {
+			link: function (scope) {
 				scope.navActive = function () {
 					return $location.path() === scope.route;
 				}

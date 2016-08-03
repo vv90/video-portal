@@ -6,17 +6,18 @@
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 	<link rel="stylesheet" href="style/style.css"/>
 </head>
-<body ng-app="videoPortal" ng-controller="AppCtrl">
+<body ng-app="videoPortal">
 
-	<div ng-include="'/templates/login.html'"></div>
-	<div class="app-container" >
+	<!--<div ng-include="'/templates/login.html'"></div>-->
+	<vp-login></vp-login>
+	<div class="app-container" ng-controller="AppCtrl">
 		<div ng-include="'/templates/header.html'"></div>
 
 		<div ng-view class="view-container" ></div>
 	</div>
 
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
 	<script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
 
@@ -28,11 +29,16 @@
 	<script src="controllers/videosCtrl.js"></script>
 	<!--<script src="controllers/navigationCtrl.js"></script>-->
 
+	<script src="services/events.js"></script>
 	<script src="services/Session.js"></script>
 	<script src="services/BaseDataService.js"></script>
+	<script src="services/md5Service.js"></script>
+	<script src="services/localStorageService.js"></script>
 	<script src="services/authService.js"></script>
+	<script src="services/videoService.js"></script>
 
 	<script src="directives/navItemDirective.js"></script>
+	<script src="directives/loginDirective.js"></script>
 
 </body>
 </html>

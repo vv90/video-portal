@@ -5,17 +5,22 @@
 (function () {
 	'use strict';
 
-	function Session () {
+	function Session (localStorageService) {
 		this.create = function (username, sessionId) {
 			this.username = username;
 			this.sessionId = sessionId;
+
+			localStorageService.setItem('session', {username: username, sessionId: sessionId});
 		};
 
 		this.destroy = function () {
 			this.username = null;
 			this.sessionId = null;
+
+			localStorageService.removeItem('session');
 		}
 	}
+	Session.$inject = ['localStorageService'];
 
 	angular.module('videoPortal')
 		.service('Session', Session);

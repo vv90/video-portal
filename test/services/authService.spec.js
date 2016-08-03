@@ -7,22 +7,44 @@ describe('Auth service', function () {
 
 	var authService;
 	var $httpBackend;
+	var $rootScope;
 	var Session;
+	var events;
 
-	beforeEach(inject(function (_authService_, _$httpBackend_, _Session_) {
+	beforeEach(inject(function (_authService_, _$httpBackend_, _$rootScope_, _Session_, _events_) {
 		authService = _authService_;
 		$httpBackend = _$httpBackend_;
+		$rootScope = _$rootScope_;
 		Session = _Session_;
+		events = _events_;
 	}));
 
-	describe('login()', function (){
+	describe('login', function (){
 		it ('forms login request correctly', function () {
+			$httpBackend.whenPOST('/user/auth')
+				.respond({status: 'success', username: 'user', sessionId: '1'});
+
 			authService.login('user', 'password');
 
 			$httpBackend.expectPOST('/user/auth', {
 				username: 'user',
 				password: '5f4dcc3b5aa765d61d8327deb882cf99'
 			});
+			$httpBackend.flush();
+		});
+
+		it ('does not require authorization', function () {
+			Session.destroy();
+			$httpBackend.whenPOST('/user/auth')
+				.respond({status: 'success', username: 'user', sessionId: '1'});
+
+			authService.login('user', 'password');
+
+			$httpBackend.expectPOST('/user/auth', {
+				username: 'user',
+				password: '5f4dcc3b5aa765d61d8327deb882cf99'
+			});
+			$httpBackend.flush();
 		});
 
 		it ('returns correct data upon login', function () {
@@ -71,9 +93,21 @@ describe('Auth service', function () {
 
 			expect(error).not.toBeNull();
 		});
+
+		it ('emits login event on successful login', function () {
+			$httpBackend.whenPOST('/user/auth')
+				.respond({status: 'success', username: 'user', sessionId: '1'});
+
+			var broadcastSpy = spyOn($rootScope, '$broadcast');
+			authService.login('user', 'password');
+
+			$httpBackend.expectPOST('/user/auth');
+			$httpBackend.flush();
+			expect(broadcastSpy).toHaveBeenCalledWith(events.auth.login, 'user');
+		});
 	});
 
-	describe('logout()', function () {
+	describe('logout', function () {
 		it ('forms logout request correctly', function () {
 			$httpBackend.whenGET('/user/logout?sessionId=1')
 				.respond({status: 'success'});

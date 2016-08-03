@@ -5,15 +5,42 @@
 (function () {
 	'use strict';
 
-	angular.module('videoPortal', ['ngRoute'])
-		.config(['$routeProvider', function ($routeProvider) {
-			$routeProvider
-				.when('/videos', {
-					templateUrl: '/templates/videos.html',
-					controller: 'VideosCtrl'
-				})
-				.otherwise({
-					redirectTo: '/'
-				});
-		}]);
+	var app = angular.module('videoPortal', ['ngRoute']);
+
+	app.config(['$routeProvider', function ($routeProvider) {
+		$routeProvider
+			.when('/videos', {
+				templateUrl: '/templates/videos.html',
+				controller: 'VideosCtrl'
+			})
+			.otherwise({
+				redirectTo: '/'
+			});
+	}]);
+
+	app.run(['$rootScope', '$location', 'authService', 'Session', 'localStorageService', 'events',
+		function ($rootScope, $location, authService, Session, localStorageService, events) {
+
+			// restore current session from the local storage
+			var lastSession = localStorageService.getItem('session');
+			if (lastSession) {
+				Session.create(lastSession.username, lastSession.sessionId);
+			}
+
+			$rootScope.$on('$routeChangeStart', function (event, next, current) {
+				if (next.$$route && !authService.isAuthorized(next.$$route.originalPath)) {
+					$location.path('/');
+					$rootScope.$broadcast(events.auth.loginChallenge, next.$$route.originalPath);
+				}
+			});
+
+			$rootScope.$on(events.auth.loginChallengeSuccess, function (event, originalPath){
+				$location.path(originalPath);
+			});
+
+			$rootScope.$on(events.auth.logout, function () {
+				$location.path('/');
+			});
+		}
+	]);
 })();

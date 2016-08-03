@@ -19,8 +19,9 @@
 		// wrap the request logic
 		// options - request options
 		// responseFilter - optional function(response) indicates what part of the response to return
-		BaseDataService.prototype.makeRequest = function (options, responseFilter) {
-			if (Session.sessionId === null) {
+		// isPublic - optional allow unauthorised access
+		BaseDataService.prototype.makeRequest = function (options, responseFilter, isPublic) {
+			if (!isPublic && (Session.sessionId === null || Session.sessionId === undefined)) {
 				return $q.reject(this.createError('Request unauthorised. You need to log in first.'));
 			} else {
 				return $http(options)

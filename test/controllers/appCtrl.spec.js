@@ -7,35 +7,44 @@ describe('App controller', function () {
 	var $controller;
 	var $rootScope;
 	var Session;
-	beforeEach(inject(function(_$controller_, _$rootScope_, _Session_) {
+	var events;
+	beforeEach(inject(function(_$controller_, _$rootScope_, _Session_, _events_, localStorageService) {
 		$controller = _$controller_;
 		$rootScope = _$rootScope_;
 		Session = _Session_;
+		events = _events_;
+
+		spyOn(localStorageService, 'setItem');
 	}));
 
-	it ('does not show login dialog when loaded', function (){
-		var $scope = {};
-		var controller = $controller('AppCtrl', {$scope: $scope});
+	it ('sets current user from Session on initialization', function () {
+		Session.create('user', 1);
+		var $scope = $rootScope.$new();
+		$controller('AppCtrl', {$scope: $scope});
 
-		expect($scope.loginActive).toBe(false);
+		expect($scope.currentUser).toBe('user');
 	});
 
-	it ('displays login dialog upon showLogin call', function () {
-		var $scope = {};
-		var controller = $controller('AppCtrl', {$scope: $scope});
+	it ('emits logout event on logout', inject(function ($q, authService){
+		var $scope = $rootScope.$new();
+		$controller('AppCtrl', {$scope: $scope});
+		var emitEventSpy = spyOn($scope, '$emit');
+		spyOn(authService, 'logout').and.callFake(function () {
+			return $q.when({status: 'success'});
+		});
 
-		$scope.showLogin();
+		$scope.logOut();
+		$scope.$apply();
 
-		expect($scope.loginActive).toBe(true);
-	});
+		expect(emitEventSpy).toHaveBeenCalledWith(events.auth.logout);
+	}));
 
-	it ('sets current user from the Session when setUser is called', function () {
-		var $scope = {};
-
-		var controller = $controller('AppCtrl', {$scope: $scope});
+	it ('sets current user on login event', function () {
+		var $scope = $rootScope.$new();
 		Session.username = 'user';
+		$controller('AppCtrl', {$scope: $scope});
 
-		$scope.setUser();
+		$rootScope.$broadcast(events.auth.login, 'user');
 
 		expect($scope.currentUser).toBe('user');
 	});

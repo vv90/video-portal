@@ -5,10 +5,12 @@
 (function() {
 	'use strict';
 
-	function videosCtrl($scope) {
-		$scope.videos = [1, 2, 4];
+	function videosCtrl($scope, videoService) {
+		videoService.getAll().then(function (videos) {
+			$scope.videos = videos;
+		});
 	}
-	videosCtrl.$inject = ['$scope'];
+	videosCtrl.$inject = ['$scope', 'videoService'];
 
 	angular.module('videoPortal').controller('VideosCtrl', videosCtrl)
 })();

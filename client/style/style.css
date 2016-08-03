@@ -123,10 +123,13 @@ body {
 	/*text-align: right;*/
 }
 
-.widget {
+.video-widget {
 	border-radius: 5px;
 	background-color: #19aa8d;
 	color: white;
+	height: 300px;
+	width: 250px;
+	margin: 10px;
 }
 
 .form {
