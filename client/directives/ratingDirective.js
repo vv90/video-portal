@@ -13,7 +13,7 @@
 			scope: {
 				rating: '=rating',
 				ratingFixed: '=ratingFixed',
-				rate: '=rate'
+				rate: '&rate'
 			}
 			// link: function (scope, element, attributes) {
 			// 	scope.rating = attributes.rating;

@@ -81,7 +81,7 @@ describe('Auth service', function () {
 		it ('rejects promise if login response status is not success', function () {
 			var error = null;
 			$httpBackend.whenPOST('/user/auth')
-				.respond({status: 'error', error: 'error description'});
+				.respond({data: {status: 'error', error: 'error description'}});
 
 			authService.login('user', 'password')
 				.catch(function (err) {

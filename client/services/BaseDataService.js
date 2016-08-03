@@ -26,10 +26,19 @@
 			} else {
 				return $http(options)
 					.then(function (response) {
-						if (response.data.status === 'success')
+						if (response.data.status === 'success') {
 							return responseFilter ? responseFilter(response) : response.data;
-						else
+						} else {
 							return $q.reject(response.data);
+						}
+				}).catch(function (response) {
+					if (response.data.status === 'error' && response.data.error === 'Not Authorized.') {
+						// this means that current session has expired
+						Session.destroy();
+						return $q.reject(response);
+					} else {
+						return $q.reject(response);
+					}
 				});
 			}
 		};

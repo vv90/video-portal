@@ -25,20 +25,6 @@ describe('App controller', function () {
 		expect($scope.currentUser).toBe('user');
 	});
 
-	it ('emits logout event on logout', inject(function ($q, authService){
-		var $scope = $rootScope.$new();
-		$controller('AppCtrl', {$scope: $scope});
-		var emitEventSpy = spyOn($scope, '$emit');
-		spyOn(authService, 'logout').and.callFake(function () {
-			return $q.when({status: 'success'});
-		});
-
-		$scope.logOut();
-		$scope.$apply();
-
-		expect(emitEventSpy).toHaveBeenCalledWith(events.auth.logout);
-	}));
-
 	it ('sets current user on login event', function () {
 		var $scope = $rootScope.$new();
 		Session.username = 'user';

@@ -9,7 +9,7 @@
 		return {
 			restrict: 'A',
 			scope: {
-				scrolledToBottom: '=vpWatchScroll'
+				scrolledToBottom: '&vpWatchScroll'
 			},
 			link: function (scope) {
 				angular.element($window).bind('scroll', function () {
@@ -21,7 +21,7 @@
 					var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
 					var windowBottom = windowHeight + window.pageYOffset;
 					if (windowBottom >= docHeight) {
-						scope.scrolledToBottom();
+						scope.scrolledToBottom()();
 					}
 				});
 			}

@@ -73,7 +73,7 @@ describe('Video service', function (){
 
 		it ('handles error response correctly', function () {
 			$httpBackend.whenGET('/videos?skip=1&limit=10&sessionId=2')
-				.respond({status: 'error', error: 'error'});
+				.respond({data: {status: 'error', error: 'error'}});
 			Session.sessionId = 2;
 			var responseSpy = jasmine.createSpy('response');
 
@@ -82,7 +82,7 @@ describe('Video service', function (){
 
 			$httpBackend.expectGET('/videos?skip=1&limit=10&sessionId=2');
 			$httpBackend.flush();
-			expect(responseSpy).toHaveBeenCalledWith({status: 'error', error: 'error'});
+			expect(responseSpy).toHaveBeenCalledWith({data: {status: 'error', error: 'error'}});
 		});
 	});
 
@@ -144,7 +144,7 @@ describe('Video service', function (){
 
 		it ('handles error response correctly', function () {
 			$httpBackend.whenGET('/video?videoId=1&sessionId=2')
-				.respond({status: 'error', error: 'error'});
+				.respond({data: {status: 'error', error: 'error'}});
 			Session.sessionId = 2;
 			var responseSpy = jasmine.createSpy('response');
 
@@ -153,7 +153,7 @@ describe('Video service', function (){
 
 			$httpBackend.expectGET('/video?videoId=1&sessionId=2');
 			$httpBackend.flush();
-			expect(responseSpy).toHaveBeenCalledWith({status: 'error', error: 'error'});
+			expect(responseSpy).toHaveBeenCalledWith({data: {status: 'error', error: 'error'}});
 		});
 	});
 
@@ -229,7 +229,7 @@ describe('Video service', function (){
 
 		it ('handles error response correctly', function () {
 			$httpBackend.whenPOST('/video/ratings?sessionId=2')
-				.respond({status: 'error', error: 'error'});
+				.respond({data: {status: 'error', error: 'error'}});
 			Session.sessionId = 2;
 			var responseSpy = jasmine.createSpy('response');
 
@@ -238,7 +238,7 @@ describe('Video service', function (){
 
 			$httpBackend.expectPOST('/video/ratings?sessionId=2');
 			$httpBackend.flush();
-			expect(responseSpy).toHaveBeenCalledWith({status: 'error', error: 'error'});
+			expect(responseSpy).toHaveBeenCalledWith({data: {status: 'error', error: 'error'}});
 		});
 	});
 });

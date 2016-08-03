@@ -22,8 +22,8 @@
 			});
 	}]);
 
-	app.run(['$rootScope', '$location', 'authService', 'Session', 'localStorageService', 'events',
-		function ($rootScope, $location, authService, Session, localStorageService, events) {
+	app.run(['$rootScope', '$location', '$window', 'authService', 'Session', 'localStorageService', 'events',
+		function ($rootScope, $location, $window, authService, Session, localStorageService, events) {
 
 			// restore current session from the local storage
 			var lastSession = localStorageService.getItem('session');
@@ -45,6 +45,8 @@
 			$rootScope.$on(events.auth.logout, function () {
 				$location.path('/');
 			});
+
+
 		}
 	]);
 })();

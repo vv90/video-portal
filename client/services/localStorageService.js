@@ -9,7 +9,7 @@
 	function localStorageService() {
 		return {
 			setItem: function (key, value) {
-				localStorage.setItem(key, JSON.stringify(value));
+				localStorage.setItem(key, typeof(value) !== 'string' ? JSON.stringify(value) : value);
 			},
 			getItem: function (key) {
 				return JSON.parse(localStorage.getItem(key));

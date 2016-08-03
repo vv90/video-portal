@@ -9,12 +9,7 @@
 			restrict: 'E',
 			templateUrl: '/templates/login.html',
 			controller: 'LoginCtrl',
-			scope: {},
-			// link: function (scope, element) {
-			// 	//scope.$on(events.auth.loginRequired, function (event){
-			// 	//	scope.loginActive = true;
-			// 	//});
-			// }
+			scope: {}
 		}
 	}
 	loginDirective.$inject = ['events'];

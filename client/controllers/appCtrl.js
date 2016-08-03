@@ -14,7 +14,6 @@
 		$scope.logOut = function () {
 			authService.logout().then(function () {
 				$scope.setUser();
-				$scope.$emit(events.auth.logout);
 			});
 
 		};

@@ -10,11 +10,11 @@
 			restrict: 'E',
 			templateUrl: '/templates/navItem.html',
 			scope: {
-				route: '='
+				route: '&route'
 			},
 			link: function (scope) {
 				scope.navActive = function () {
-					return $location.path() === scope.route;
+					return $location.path() === scope.route();
 				}
 			},
 			transclude: true

@@ -34,7 +34,7 @@
 		};
 		$scope.setRating = function (rating) {
 			if (!$scope.ratingFixed)
-				$scope.rate(rating);
+				$scope.rate()(rating);
 		}
 	}
 	ratingCtrl.$inject = ['$scope'];
