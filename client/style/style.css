@@ -2,6 +2,18 @@ html, body {
 	height: 100%;
 }
 
+h1 {
+	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.6em;
+}
+
+h3 {
+	font-size: 1.4em;
+}
+
 body {
 	background-color: #f3f3f4;
 	margin: 0;
@@ -35,7 +47,7 @@ body {
 }
 
 .header-logo {
-	font-size: 1.8em;
+
 	color: white;
 	margin: 0 20px;
 	/*display: inline-block;*/
@@ -135,8 +147,16 @@ body {
 	height: 300px;
 	width: 250px;
 	margin: 0.5em auto;
+	overflow: hidden;
 	/*padding: 0.5em;*/
 	/*cursor: pointer;*/
+}
+
+.video-widget-text {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 10;
+	-webkit-box-orient: vertical;
 }
 
 .form {

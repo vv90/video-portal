@@ -1,9 +1,9 @@
 <h2>Videos</h2>
-<div class="videos-container">
+<div class="videos-container" vp-watch-scroll="scrolledToBottom">
 	<div class="video-widget button button-primary" ng-repeat="video in videos" ng-click="open(video)">
 		<h3 ng-bind="video.name"></h3>
 		<vp-rating rating="video.ratings | average" rating-fixed="true"></vp-rating>
-		<p ng-bind="video.description"></p>
+		<p class="video-widget-text" ng-bind="video.description"></p>
 	</div>
 </div>
 

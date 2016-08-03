@@ -224,7 +224,7 @@ describe('Video service', function (){
 
 			$httpBackend.expectPOST('/video/ratings?sessionId=2');
 			$httpBackend.flush();
-			expect(success).toEqual({status: 'success', data: {a: 1}});
+			expect(success).toEqual({a: 1});
 		});
 
 		it ('handles error response correctly', function () {

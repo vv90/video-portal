@@ -6,13 +6,25 @@
 	'use strict';
 
 	function videosCtrl($scope, $location, videoService) {
-		videoService.getAll().then(function (videos) {
-			$scope.videos = videos;
-		});
+		var videosPerPage = 10;
+		var loaded = 0;
+		$scope.videos = [];
+		function loadMore() {
+			videoService.getAll(loaded, loaded + videosPerPage).then(function (videos) {
+				$scope.videos = $scope.videos.concat(videos);
+				loaded += videosPerPage;
+			})
+		}
 
 		$scope.open = function (video) {
 			$location.path('/video/' + video._id);
-		}
+		};
+
+		$scope.scrolledToBottom = function () {
+			loadMore();
+		};
+
+		loadMore();
 	}
 	videosCtrl.$inject = ['$scope', '$location', 'videoService'];
 
