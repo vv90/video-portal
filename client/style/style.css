@@ -38,8 +38,9 @@ body {
 	background-color: #2f4050;
 	padding: 0;
 	margin-top: 0;
-	/*position: relative;*/
-	overflow: auto;
+	position: relative;
+	/*line-height: 2em;*/
+	overflow: hidden;
 }
 
 .header > * {
@@ -54,20 +55,43 @@ body {
 }
 
 .header-auth {
-	/*position: absolute;*/
+	position: absolute;
 	float: right;
 	right: 0;
-	margin: 10px;
-	direction: rtl;
+	top: 50%;
+	/*margin: 0 10px;*/
+	text-align: right;
+	height: 50px;
+	margin-top: -25px;
+	margin-right: 10px;
+	/*overflow: hidden;*/
 }
 
 .header-auth h3 {
 	margin: 0;
+	line-height: 1em;
+}
+
+.user-container {
+	display: inline-block;
 }
 
 .header-link:hover {
 	color: white;
 	cursor: pointer;
+
+}
+
+.user-icon {
+	font-size: 40px;
+	margin: 5px;
+}
+
+.slider {
+	position: absolute;
+	background: #2f4050;
+	height: 100px;
+	width: 100px;
 }
 
 .nav {
@@ -148,9 +172,16 @@ body {
 	width: 250px;
 	margin: 0.5em auto;
 	overflow: hidden;
+
+	transition: all 0.2s ease-in-out;
 	/*padding: 0.5em;*/
 	/*cursor: pointer;*/
 }
+
+.video-widget:hover {
+	transform: scale(1.1);
+}
+
 
 .video-widget-text {
 	overflow: hidden;

@@ -17,6 +17,9 @@
 				templateUrl: 'templates/playVideo.html',
 				controller: 'PlayVideoCtrl'
 			})
+			.when('/', {
+				templateUrl: 'templates/home.html'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

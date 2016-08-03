@@ -5,8 +5,7 @@
 (function() {
 	'use strict';
 
-	function playVideoCtrl($scope, $routeParams, $location, videoService) {
-		var currentlyPlaying = [];
+	function playVideoCtrl($scope, $routeParams, videoService) {
 
 		$scope.video = null;
 		videoService.get($routeParams.id).then(function (video) {
@@ -17,21 +16,8 @@
 				$scope.video = video;
 			});
 		};
-		// $scope.videoControl = {};
-		// $scope.play = function () {
-		// 	if ($scope.videoControl.play)
-		// 		$scope.videoControl.play();
-		// };
-		// $scope.pause = function () {
-		// 	if ($scope.videoControl.pause)
-		// 		$scope.videoControl.pause();
-		// };
-		// $scope.onplay = function (params) {
-		// 	currentlyPlaying.push(params);
-		// 	console.log(currentlyPlaying);
-		// }
 	}
-	playVideoCtrl.$inject = ['$scope', '$routeParams', '$location', 'videoService'];
+	playVideoCtrl.$inject = ['$scope', '$routeParams', 'videoService'];
 
 	angular.module('videoPortal').controller('PlayVideoCtrl', playVideoCtrl);
 })();

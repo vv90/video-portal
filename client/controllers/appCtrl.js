@@ -5,7 +5,7 @@
 (function (){
 	'use strict';
 
-	function appCtrl($scope, authService, Session, events) {
+	function appCtrl($scope, $rootScope, authService, Session, events) {
 		$scope.currentUser = null;
 
 		$scope.setUser = function () {
@@ -17,14 +17,16 @@
 			});
 
 		};
-
+		$scope.logIn = function () {
+			$rootScope.$broadcast(events.auth.loginChallenge);
+		};
 		$scope.setUser();
 
 		$scope.$on(events.auth.login, function () {
 			$scope.setUser();
 		})
 	}
-	appCtrl.$inject = ['$scope', 'authService', 'Session', 'events'];
+	appCtrl.$inject = ['$scope', '$rootScope', 'authService', 'Session', 'events'];
 
 	angular.module('videoPortal').controller('AppCtrl', appCtrl);
 })();

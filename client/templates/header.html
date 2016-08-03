@@ -7,11 +7,30 @@
 	</nav>
 	<div class="header-auth">
 		<div ng-show="currentUser">
-			<h3>{{currentUser}}</h3>
-			<span class="header-link" ng-click="logOut()">Log Out</span>
+			<div class="user-container">
+				<h3>
+					<span>Hello, {{currentUser}}</span>
+				</h3>
+				<span class="header-link" ng-click="logOut()">Log Out</span>
+
+			</div>
+			<span class="user-icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+			<!--<div class="slider">-->
+				<!---->
+			<!--</div>-->
+			<!---->
+
 		</div>
 		<div ng-hide="currentUser">
-			<span class="header-link" ng-click="showLogin()">Log In</span>
+			<h3 class="header-link" ng-click="logIn()">
+				<span>Log In</span>
+				<span><i class="fa fa-sign-in" aria-hidden="true"></i></span>
+			</h3>
+			<!--<div class="user-container">-->
+
+
+			<!--</div>-->
+
 		</div>
 	</div>
 </header>
