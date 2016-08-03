@@ -1,0 +1,8 @@
+<span ng-mouseleave="resetRating()">
+	<i class="fa rating-star"
+	   aria-hidden="true"
+	   ng-repeat="star in stars"
+	   ng-class="star.active ? 'fa-star fa-star-active' : 'fa-star-o'"
+	   ng-mouseover="previewRating($index + 1)"
+	   ng-click="setRating($index + 1)"></i>
+</span>

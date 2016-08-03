@@ -1,7 +1,10 @@
 <h2>Videos</h2>
-
-<div class="video-widget" ng-repeat="video in videos">
-
+<div class="videos-container">
+	<div class="video-widget button button-primary" ng-repeat="video in videos" ng-click="open(video)">
+		<h3 ng-bind="video.name"></h3>
+		<vp-rating rating="video.ratings | average" rating-fixed="true"></vp-rating>
+		<p ng-bind="video.description"></p>
+	</div>
 </div>
 
 

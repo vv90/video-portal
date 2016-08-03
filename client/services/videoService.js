@@ -41,6 +41,9 @@
 				method: 'POST',
 				params: {sessionId: Session.sessionId},
 				data: {videoId: id, rating: rating}
+			}, function (response) {
+				// return only the video
+				return response.data.data;
 			});
 		};
 

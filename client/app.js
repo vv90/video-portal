@@ -13,6 +13,10 @@
 				templateUrl: '/templates/videos.html',
 				controller: 'VideosCtrl'
 			})
+			.when('/video/:id', {
+				templateUrl: 'templates/playVideo.html',
+				controller: 'PlayVideoCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

@@ -1,0 +1,15 @@
+
+<h2>
+	<span ng-bind="video.name"></span>
+	<vp-rating rating="video.ratings | average" rating-fixed="false" rate="rate"></vp-rating>
+</h2>
+<video ng-if="video" width="800" height="600" controls class="video-frame">
+	<source ng-src="{{video.url}}" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+
+
+<section class="section">
+	<h3 class="section-heading">Description</h3>
+	<p class="section-text" ng-bind="video.description"></p>
+</section>

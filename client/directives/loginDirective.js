@@ -10,11 +10,11 @@
 			templateUrl: '/templates/login.html',
 			controller: 'LoginCtrl',
 			scope: {},
-			link: function (scope, element) {
-				//scope.$on(events.auth.loginRequired, function (event){
-				//	scope.loginActive = true;
-				//});
-			}
+			// link: function (scope, element) {
+			// 	//scope.$on(events.auth.loginRequired, function (event){
+			// 	//	scope.loginActive = true;
+			// 	//});
+			// }
 		}
 	}
 	loginDirective.$inject = ['events'];
