@@ -11,13 +11,16 @@
 			templateUrl: '/templates/rating.html',
 			controller: 'RatingCtrl',
 			scope: {
-				rating: '=rating',
-				ratingFixed: '=ratingFixed',
+				parentRating: '&rating',
+				parentRatingFixed: '&ratingFixed',
 				rate: '&rate'
+			},
+
+			link: function (scope, element, attributes) {
+				// initialize the local scope for the controller with the initial values
+				scope.rating = scope.parentRating();
+				scope.ratingFixed = scope.parentRatingFixed();
 			}
-			// link: function (scope, element, attributes) {
-			// 	scope.rating = attributes.rating;
-			// }
 		}
 	}
 

@@ -14,7 +14,7 @@
 				// this directive ensures that only one video can be played at any time across all tabs
 				var video = element[0];
 
-				// comunicate play event through local storage
+				// communicate play event through local storage
 				// Math.random for is good enough for id
 				video.onplay = function () {
 					localStorageService.setItem('videoPlaying', { user: Session.username, id: Math.random() });
@@ -24,6 +24,7 @@
 				};
 
 				// subscribe to local storage changes
+				// this is how we know that a video has started playing in another window
 				angular.element($window).on('storage', function (event) {
 					var videoPlaybackToken;
 					if (event.key === 'videoPlaying' &&
@@ -35,7 +36,7 @@
 					}
 				});
 
-				// clean up the event subscription
+				// clean up the window event subscription
 				scope.$on('$destroy', function () {
 					angular.element($window).off('storage');
 				});

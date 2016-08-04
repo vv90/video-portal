@@ -9,8 +9,9 @@
 </head>
 <body ng-app="videoPortal">
 
-	<!--<div ng-include="'/templates/login.html'"></div>-->
 	<vp-login></vp-login>
+	<vp-notification></vp-notification>
+
 	<div class="app-container" ng-controller="AppCtrl">
 		<div ng-include="'/templates/header.html'"></div>
 
@@ -29,6 +30,7 @@
 	<script src="controllers/videosCtrl.js"></script>
 	<script src="controllers/playVideoCtrl.js"></script>
 	<script src="controllers/ratingCtrl.js"></script>
+	<script src="controllers/notificationCtrl.js"></script>
 
 	<script src="services/events.js"></script>
 	<script src="services/Session.js"></script>
@@ -43,6 +45,7 @@
 	<script src="directives/ratingDirective.js"></script>
 	<script src="directives/watchScrollDirective.js"></script>
 	<script src="directives/videoControlDirective.js"></script>
+	<script src="directives/notificationDirective.js"></script>
 
 	<script src="filters/averageFilter.js"></script>
 </body>

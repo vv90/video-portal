@@ -1,7 +1,8 @@
 
 <h2>
 	<span ng-bind="video.name"></span>
-	<vp-rating rating="video.ratings | average"
+	<vp-rating ng-if="video"
+	           rating="video.ratings | average"
 	           rating-fixed="false"
 	           rate="rate"></vp-rating>
 </h2>

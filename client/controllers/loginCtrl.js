@@ -24,13 +24,10 @@
 		};
 
 		$scope.login = function (username, password) {
-			if (!username || ! password) {
-				$scope.error = 'Please enter correct login credentials';
-				return;
-			}
 			authService.login(username, password)
 			 	.then(function (response) {
 
+			 		// if login was triggered by trying to navigate to a page
 				    if (loginChallengeReturnPath) {
 					    $scope.$emit(events.auth.loginChallengeSuccess, loginChallengeReturnPath);
 				    }
@@ -42,6 +39,7 @@
 				});
 		};
 
+		// listen for login required events
 		$scope.$on(events.auth.loginChallenge, function (event, originalPath) {
 			$scope.loginActive = true;
 			loginChallengeReturnPath = originalPath;

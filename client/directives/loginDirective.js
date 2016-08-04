@@ -4,7 +4,7 @@
 (function () {
 	'use strict';
 
-	function loginDirective(events) {
+	function loginDirective() {
 		return {
 			restrict: 'E',
 			templateUrl: '/templates/login.html',
@@ -12,7 +12,6 @@
 			scope: {}
 		}
 	}
-	loginDirective.$inject = ['events'];
 
 	angular.module('videoPortal').directive('vpLogin', loginDirective);
 })();

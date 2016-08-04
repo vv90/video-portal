@@ -20,6 +20,8 @@
 			$location.path('/video/' + video._id);
 		};
 
+		// lazy scrolling
+		// we use vp-watch-scroll directive to notify the controller about the scrolling event
 		$scope.scrolledToBottom = function () {
 			loadMore();
 		};

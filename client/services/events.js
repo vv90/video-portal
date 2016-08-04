@@ -11,6 +11,7 @@
 			logout: 'auth:logout',
 			loginChallenge: 'auth:loginChallenge',
 			loginChallengeSuccess: 'loginChallengeSuccess'
-		}
+		},
+		notification: 'notification'
 	});
 })();

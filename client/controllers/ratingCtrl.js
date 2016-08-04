@@ -33,8 +33,11 @@
 			displayRating($scope.rating);
 		};
 		$scope.setRating = function (rating) {
-			if (!$scope.ratingFixed)
+			if (!$scope.ratingFixed) {
 				$scope.rate()(rating);
+				$scope.rating = rating;
+				$scope.ratingFixed = true;
+			}
 		}
 	}
 	ratingCtrl.$inject = ['$scope'];
