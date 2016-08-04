@@ -3,6 +3,7 @@
 	<div class="video-widget button button-primary" ng-repeat="video in videos" ng-click="open(video)">
 		<h3 ng-bind="video.name"></h3>
 		<vp-rating rating="video.ratings | average" rating-fixed="true"></vp-rating>
+		<!--<video width="250" ng-if="video" ng-src="{{video.url}}"></video>-->
 		<p class="video-widget-text" ng-bind="video.description"></p>
 	</div>
 </div>

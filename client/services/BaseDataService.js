@@ -32,7 +32,7 @@
 							return $q.reject(response.data);
 						}
 				}).catch(function (response) {
-					if (response.data.status === 'error' && response.data.error === 'Not Authorized.') {
+					if (response.data && response.data.status === 'error' && response.data.error === 'Not Authorized.') {
 						// this means that current session has expired
 						Session.destroy();
 						return $q.reject(response);

@@ -40,7 +40,7 @@ body {
 	margin-top: 0;
 	position: relative;
 	/*line-height: 2em;*/
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .header > * {
@@ -59,21 +59,20 @@ body {
 	float: right;
 	right: 0;
 	top: 50%;
-	/*margin: 0 10px;*/
 	text-align: right;
 	height: 50px;
 	margin-top: -25px;
 	margin-right: 10px;
-	/*overflow: hidden;*/
+	line-height: 50px;
+	display: table;
+	min-width: 100px;
 }
 
-.header-auth h3 {
+.header-auth > h3,
+.header-auth > span {
 	margin: 0;
-	line-height: 1em;
-}
-
-.user-container {
-	display: inline-block;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .header-link:hover {
@@ -82,9 +81,31 @@ body {
 
 }
 
+.header-dropdown {
+	visibility: hidden;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	color: #cfd2da;
+	background-color: #2f4050;
+	font-size: 16px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding: 0 10px;
+	transition: all 0.3s ease-in-out;
+	transition-delay: 0.2s;
+	transform: scaleY(0);
+	transform-origin: 0 0;
+}
+
+.header-auth:hover .header-dropdown {
+	visibility: visible;
+	transform: scaleY(1);
+}
+
 .user-icon {
 	font-size: 40px;
-	margin: 5px;
+	padding: 0 10px;
 }
 
 .slider {
@@ -121,7 +142,6 @@ body {
 }
 
 .overlay {
-	/*display: none;*/
 	position: fixed;
 	z-index: 10;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -129,6 +149,28 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
+	/*opacity: 1;*/
+	transition: all 0.3s ease-in-out;
+}
+
+.overlay-show {
+	visibility: visible;
+	opacity: 1;
+
+}
+
+.overlay-hide {
+	opacity: 0;
+	visibility: hidden;
+
+}
+
+.overlay-show .overlay-dialog {
+	transform: scale(1);
+}
+
+.overlay-hide .overlay-dialog {
+	transform: scale(0.5);
 }
 
 .overlay-dialog {
@@ -141,6 +183,7 @@ body {
 	top: 50%;
 	margin: -6em auto 0 auto;
 	overflow: auto;
+	transition: all 0.3s ease-in-out;
 }
 
 .overlay-form {
@@ -168,14 +211,18 @@ body {
 	/*border-radius: 0.3em;*/
 	/*background-color: #19aa8d;*/
 	/*color: white;*/
-	height: 300px;
-	width: 250px;
+	height: 310px;
+	width: 260px;
 	margin: 0.5em auto;
 	overflow: hidden;
 
 	transition: all 0.2s ease-in-out;
 	/*padding: 0.5em;*/
 	/*cursor: pointer;*/
+}
+
+.video-widget video {
+	margin: auto;
 }
 
 .video-widget:hover {
@@ -208,6 +255,10 @@ body {
 	font-size: 1em;
 }
 
+.form-item input.ng-invalid:not(.ng-pristine) {
+	border-color: red;
+}
+
 .form-item input:focus {
 	outline: none;
 	border: 1px solid #19aa8d;
@@ -237,6 +288,7 @@ body {
 	margin-right: 0.2em;
 	cursor: pointer;
 	outline: none;
+	transition: all 0.3s ease-in-out;
 }
 
 .button:hover {
@@ -246,6 +298,11 @@ body {
 .button:active {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) inset;
 }
+
+
+/*.button[disabled] {*/
+	/*cursor: not-allowed;*/
+/*}*/
 
 .button-primary {
 	background-color: #1ab394;
@@ -257,6 +314,11 @@ body {
 	background-color: #18a689;
 	border-color: #18a689;
 	color: #FFFFFF;
+}
+
+.button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 .video-frame {

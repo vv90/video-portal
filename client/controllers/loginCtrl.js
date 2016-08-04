@@ -15,6 +15,7 @@
 
 		function close() {
 			$scope.loginActive = false;
+			$scope.error = null;
 			loginChallengeReturnPath = null;
 		}
 
@@ -23,6 +24,10 @@
 		};
 
 		$scope.login = function (username, password) {
+			if (!username || ! password) {
+				$scope.error = 'Please enter correct login credentials';
+				return;
+			}
 			authService.login(username, password)
 			 	.then(function (response) {
 

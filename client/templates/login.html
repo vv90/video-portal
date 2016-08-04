@@ -1,20 +1,22 @@
-<div class="overlay" ng-if="loginActive">
+<div class="overlay" ng-class="loginActive ? 'overlay-show' : 'overlay-hide'">
 	<div class="overlay-dialog">
 		<h3 class="overlay-heading">Log In</h3>
-		<form class="form overlay-form">
+		<form name="loginForm" class="form overlay-form">
 			<div class="form-item">
 				<label>User</label>
-				<input type="text" ng-model="username"/>
+				<input type="text" required ng-model="username"  />
 			</div>
 			<div class="form-item">
 				<label>Password</label>
-				<input type="password" ng-model="password"/>
+				<input type="password" required ng-model="password"/>
 			</div>
 		</form>
 		<span class="form-error" ng-show="error" ng-bind="error"></span>
 		<div class="overlay-buttons">
 			<button class="button" type="button" ng-click="cancel()">Cancel</button>
-			<button class="button button-primary" type="button" ng-click="login(username, password)">Log In</button>
+			<button class="button button-primary" type="button"
+			        ng-disabled="loginForm.$invalid"
+			        ng-click="login(username, password)">Log In</button>
 		</div>
 	</div>
 </div>
