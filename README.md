@@ -1,16 +1,17 @@
 # Video Portal
 This is an evaluation project application written on angularJS
 Karma/Jasmine is used for testing
-
-I usually use webpack for bundling the application.
-But since it's not listed in the allowed frameworks I decided not to use it.
+Gulp is used as a build tool
 
 
-To run the application you need to start node server.
-There's npm script set up for this "npm start".
-Or you just run "node index.js" from the terminal
-After the node server is started (by default on port 3000) you can open the app in the browser
 
-There's npm script for running tests on Karma "npm test"
+To run the application you need to have gulp, node and karma installed.
+
+Navigate to the project root directory "video-portal". Then...
+1) run "gulp" - that will build all application assets and copy required files to the /build directory
+2) run "node index.js" - that will start the server
+3) run "karma start" - that will run unit tests
+
+After the node server is started (by default on port 3000) you can open the app in the browser.
 
 

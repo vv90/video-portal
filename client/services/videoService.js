@@ -5,7 +5,7 @@
 (function () {
 	'use strict';
 
-	function videoService($http, $q, Session, BaseDataService) {
+	function videoService(Session, BaseDataService) {
 
 		// inherit from the base service
 		var VideoService = function () {
@@ -49,7 +49,7 @@
 
 		return new VideoService();
 	}
-	videoService.$inject = ['$http', '$q', 'Session', 'BaseDataService'];
+	videoService.$inject = ['Session', 'BaseDataService'];
 
 	angular.module('videoPortal').factory('videoService', videoService);
 })();
