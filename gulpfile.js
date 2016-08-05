@@ -38,10 +38,15 @@ gulp.task('videos', function (){
 		.pipe(gulp.dest('build/videos'));
 });
 
+gulp.task('images', function () {
+	return gulp.src('images/*')
+		.pipe(gulp.dest('build/images'));
+});
+
 gulp.task('clean', function () {
 	return del.sync('build');
 });
 
 gulp.task('default', function (){
-	runSequence('clean', ['bundle', 'fonts', 'templates', 'videos']);
+	runSequence('clean', ['bundle', 'fonts', 'templates', 'videos', 'images']);
 });

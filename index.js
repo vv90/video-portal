@@ -30,13 +30,15 @@ helperFunctions.populateDb();
 //Initilizing routes.
 routes(app);
 
-// serve video files.
-app.use('/videos',express.static('videos'));
-// serve client side code.
-app.use('/',express.static('client'));
+// // serve video files.
+// app.use('/videos',express.static('videos'));
+// // serve images
+// app.use('/images',express.static('images'));
+// // serve client side code.
+// app.use('/',express.static('client'));
 
 // serve the gulp built version
-//app.use('/', express.static('build'));
+app.use('/', express.static('build'));
 
 //Finally starting the listener
 app.listen(configs.applicationPort, function () {

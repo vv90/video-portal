@@ -330,6 +330,11 @@ body {
 	min-height: 100%;
 }
 
+.image-frame {
+	width: 100%;
+	height: auto;
+}
+
 .section {
 	font-size: 18px;
 }

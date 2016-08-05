@@ -14,4 +14,9 @@ Navigate to the project root directory "video-portal". Then...
 
 After the node server is started (by default on port 3000) you can open the app in the browser.
 
-
+Implemented features include
+1) user authentication (client side validation)
+2) viewing videos (only one video can be played at the same time across all windows)
+3) rating videos (overall rating is displayed before rating a video)
+4) css animations
+5) responsive UI
