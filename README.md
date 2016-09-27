@@ -3,7 +3,7 @@ This is an evaluation project application written on angularJS
 Karma/Jasmine is used for testing
 Gulp is used as a build tool
 
-
+I went with quite simple file organization approach here because the project is small. For a bigger project I would, of course, use a more complex organization method.
 
 To run the application you need to have gulp, node and karma installed.
 
